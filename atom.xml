@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>rebirthwyw</title>
+  <icon>https://blog.rebirthwyw.top/icon.png</icon>
+  
+  <link href="https://blog.rebirthwyw.top/atom.xml" rel="self"/>
+  
+  <link href="https://blog.rebirthwyw.top/"/>
+  <updated>2021-10-22T09:17:47.258Z</updated>
+  <id>https://blog.rebirthwyw.top/</id>
+  
+  <author>
+    <name>rebirthwyw</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>这些年CTF中做过的Web题</title>
+    <link href="https://blog.rebirthwyw.top/2021/10/22/web-challenges-in-my-ctf-life/"/>
+    <id>https://blog.rebirthwyw.top/2021/10/22/web-challenges-in-my-ctf-life/</id>
+    <published>2021-10-22T08:29:41.000Z</published>
+    <updated>2021-10-22T09:17:47.258Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;2015年底开始参加CTF以来，参加过很多比赛，本科在BXS</summary>
+        
+      
+    
+    
+    
+    
+    <category term="life" scheme="https://blog.rebirthwyw.top/tags/life/"/>
+    
+    <category term="ctf" scheme="https://blog.rebirthwyw.top/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>初衷</title>
+    <link href="https://blog.rebirthwyw.top/2021/10/22/weclome-to-my-blog/"/>
+    <id>https://blog.rebirthwyw.top/2021/10/22/weclome-to-my-blog/</id>
+    <published>2021-10-22T08:26:29.000Z</published>
+    <updated>2021-10-22T09:14:17.938Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;之前也潦草地创建过一个博客，内容很少，两年多只更新了两篇CTF的WriteUp以及一个学习Java的备忘录。之所以不更新博客，主要是因为人懒，知识习惯性地记录在脑子里，想到需要整理成文、排版发布就放弃了。还有一方面原因，是因为在我狭隘的认识里，一直觉得网络安全是一个沉默的战</summary>
+        
+      
+    
+    
+    
+    
+    <category term="life" scheme="https://blog.rebirthwyw.top/tags/life/"/>
+    
+  </entry>
+  
+</feed>
