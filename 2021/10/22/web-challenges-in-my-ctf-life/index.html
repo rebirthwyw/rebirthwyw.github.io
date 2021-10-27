@@ -14,7 +14,7 @@
 <meta property="og:description" content="前言2015年底开始参加CTF以来，参加过很多比赛，本科在BXS team时由于时间过于久远以及当时水平也比较低就不做记录了。以下记录的题目从我代表NeSE开始参加的第一场比赛Hitcon2017为起始点。 2017BabyFirst Revenge v2题目链接题目考点是四字节命令注入。一道考察选手对于linux上各种命令特性了解和使用的题目。当年比赛时肝出这道题让我很开心，印象中当时国内队伍只">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-22T08:29:41.000Z">
-<meta property="article:modified_time" content="2021-10-22T09:17:47.258Z">
+<meta property="article:modified_time" content="2021-10-27T07:48:57.601Z">
 <meta property="article:author" content="rebirthwyw">
 <meta property="article:tag" content="life">
 <meta property="article:tag" content="ctf">
@@ -104,7 +104,10 @@
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>2015年底开始参加CTF以来，参加过很多比赛，本科在BXS team时由于时间过于久远以及当时水平也比较低就不做记录了。以下记录的题目从我代表NeSE开始参加的第一场比赛Hitcon2017为起始点。</p>
 <h1 id="2017"><a href="#2017" class="headerlink" title="2017"></a>2017</h1><h2 id="BabyFirst-Revenge-v2"><a href="#BabyFirst-Revenge-v2" class="headerlink" title="BabyFirst Revenge v2"></a>BabyFirst Revenge v2</h2><p><a target="_blank" rel="noopener" href="https://github.com/orangetw/My-CTF-Web-Challenges/blob/master/hitcon-ctf-2017/babyfirst-revenge-v2/index.php">题目链接</a><br>题目考点是四字节命令注入。一道考察选手对于linux上各种命令特性了解和使用的题目。当年比赛时肝出这道题让我很开心，印象中当时国内队伍只有我们做出来了。这题和Web的攻击技巧关系不大，主要是对linux上各种命令的掌握程度。</p>
 <h2 id="baby-h-master-php-2017"><a href="#baby-h-master-php-2017" class="headerlink" title="baby^h-master-php-2017"></a>baby^h-master-php-2017</h2><p><a target="_blank" rel="noopener" href="https://github.com/orangetw/My-CTF-Web-Challenges/tree/master/hitcon-ctf-2017/baby%5Eh-master-php-2017">题目链接</a><br>应该是phar反序列化这个攻击面被第一次公开地展示到了大家面前。后面经过blackhat上的详细展开，我们现在的题目中才有了这么多phar反序列化的考点(<a target="_blank" rel="noopener" href="https://i.blackhat.com/us-18/Thu-August-9/us-18-Thomas-Its-A-PHP-Unserialization-Vulnerability-Jim-But-Not-As-We-Know-It.pdf">会议链接</a>)。</p>
-<h1 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h1><p>最新更新时间: 2021年10月22日<br>持续更新…</p>
+<h1 id="2021"><a href="#2021" class="headerlink" title="2021"></a>2021</h1><h2 id="number-manager"><a href="#number-manager" class="headerlink" title="number manager"></a>number manager</h2><p>刚刚打完asisctf2021,质量出乎意料的高，前端选手的狂欢。这题采用了goahead这个c语言写的http框架作为server，题目大意是给了一个可以创建post的功能，攻击者真正可控的只有创建的子目录名，同时有个dom xss的点在location.hash处使得你可以控制key为msg的一个cookie的值，最终目标是绕过csrf的检查实现xss。考察的其实是对于goahead的代码审计。代码有两个问题，一个是防御csrf时采用websParseCookie函数去获取csrf_token的值，但是websParseCookie的实现存在问题，可以通过控制msg的值伪造csrf_token的值。第二个问题算是一个危害很低的0day，goahead的static handle在处理目录资源是会返回302请求，但是Location处直接返回了目录名，没有作crlf的防御(前提是目录名存在，所以才有创建子目录的功能)。</p>
+<h2 id="af2"><a href="#af2" class="headerlink" title="af2"></a>af2</h2><p>同样是asisctf2021的一个题目，是一个xsleak，题目直接提示了参考 <a target="_blank" rel="noopener" href="https://research.securitum.com/stealing-data-in-great-style-how-to-use-css-to-attack-web-application/">https://research.securitum.com/stealing-data-in-great-style-how-to-use-css-to-attack-web-application/</a> 的技术。唯一区别是，这题的csp是<code>script-src &#39;none&#39;; img-src &#39;none&#39;; frame-src &#39;self&#39;; font-src data: ;</code>因此不能采用 -webkit-scrollbar 配合 backgroud 的方式作消息外带。这道题采用了 lazy loading iframe 的方式来外带消息。因为用window.open方式打开的页面中我们是可以拿到加载的frame的数量的，所以采用 lazy loading 的方式可以在滑动屏幕效果产生时load指定的iframe，再通过window.open拿到的window对象来判断是否加载了特定页面来泄露信息。</p>
+<h2 id="phpphp"><a href="#phpphp" class="headerlink" title="phpphp"></a>phpphp</h2><p>同样是asisctf2021的一个题目，一个php的0day题。。。。题目大意是用python实现了一个http协议的parse，将fastcgi需要的环境变量处理好交给后面的fpm去解析。这里注意处理的细节是 script_filename 是将 document_root 和 script_name 的结果作归一化后传入，但是 script_name 则不做处理直接取request_uri 的到 .php 为止的部分传入，目标是任意文件读取。我们知道在古早的时候 fpm 可以指定 script_filename 为任意文件，但是后面 security.limit_extensions 这个配置的出现基本限制了 script_filename 为特定后缀的文件，比如 .php。这次的漏洞就是绕过了 security.limit_extensions 的限制。漏洞的位置是 main/fopen_wrappers.c 中的 php_fopen_primary_script 函数，主要是把传给fpm的环境变量中的SCRIPT_NAME进行了解析作为后续要打开的文件的handle，具体的poc就不展示了，有兴趣的同学看看代码应该就能构造出来。</p>
+<h1 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h1><p>上次更新时间: 2021年10月22日<br>最新更新时间: 2021年10月27日<br>持续更新…</p>
 
       
     </div>
